@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "257150797096",
+    "project_id": "echoes-of-emotions-1234",
+    "storage_bucket": "echoes-of-emotions-1234.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257150797096:android:59310d9beb6a9969f03c1d",
+        "android_client_info": {
+          "package_name": "com.bsit.echoesofemotions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEp4wdJSSQfBSpm5SnmVGZjLe5WOvxIs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
