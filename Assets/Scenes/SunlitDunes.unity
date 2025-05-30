@@ -237,9 +237,9 @@ GameObject:
   - component: {fileID: 671175901}
   - component: {fileID: 671175903}
   - component: {fileID: 671175904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,6 +528,9 @@ MonoBehaviour:
   manualSpawnPoints: []
   useRandomSpawning: 1
   randomSpawnCount: 10
+  randomVerticalChance: 0.3
+  randomCombinedChance: 0.3
+  minSpawnDistance: 1
 --- !u!4 &928804687
 Transform:
   m_ObjectHideFlags: 0
