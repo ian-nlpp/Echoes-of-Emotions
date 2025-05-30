@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     private float invincibilityDuration = 1f; // 1 second invincibility
     private float invincibilityTimer = 0f;
     private bool isInvincible = false;
+    public static event System.Action OnPlayerTookDamage;
 
     void Start()
     {
@@ -32,19 +33,20 @@ public class PlayerController : MonoBehaviour
     {
         if (isInvincible)
         {
-            return; // Ignore damage during invincibility
+            return;
         }
 
         stats.currentHP = Mathf.Max(0, stats.currentHP - damage);
+        OnPlayerTookDamage?.Invoke(); // <-- ADD THIS LINE
+
         Debug.Log($"{stats.playerName} took {damage} damage. Current HP: {stats.currentHP}");
         if (stats.currentHP <= 0)
         {
             Debug.Log("Player defeated!");
-            // Handle player death (e.g., game over or respawn)
+            // Handle player death
         }
         else
         {
-            // Start invincibility
             isInvincible = true;
             invincibilityTimer = invincibilityDuration;
         }
