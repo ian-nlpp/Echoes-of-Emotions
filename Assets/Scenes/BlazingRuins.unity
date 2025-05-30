@@ -2612,6 +2612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuPanel: {fileID: 1970370179}
   volumeSlider: {fileID: 717632112}
+  playerStats: {fileID: 11400000, guid: 4ecbfe27ad5ba384fbcfc957bd914497, type: 2}
 --- !u!114 &1937578811
 MonoBehaviour:
   m_ObjectHideFlags: 0

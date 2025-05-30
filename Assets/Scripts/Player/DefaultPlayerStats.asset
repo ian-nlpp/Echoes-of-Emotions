@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Bearer of Balance
   maxHP: 100
-  currentHP: 200
+  currentHP: 100
   collectedGems: 0

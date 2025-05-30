@@ -1,6 +1,7 @@
 // Assets/Scripts/PauseManager.cs
 using UnityEngine;
 using UnityEngine.UI; // Required for Slider
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PauseManager : MonoBehaviour
     public Slider volumeSlider;
     private bool isPaused = false;
     private float volumeBeforePause;
+    public PlayerStats playerStats; // Assign this in the Inspector
 
     void Start()
     {
@@ -76,10 +78,31 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    public void OnSaveAndExit()
+    public async void OnSaveAndExit()
     {
-        // This function is a placeholder for now.
         Debug.Log("Save and Exit button clicked!");
-        // We will add saving and scene-loading logic here in the future.
+
+        if (CloudSaveManager.instance != null && playerStats != null)
+        {
+            // Create a data object from our current stats
+            var progressData = new PlayerProgressData
+            {
+                PlayerName = playerStats.playerName,
+                CurrentHP = playerStats.currentHP,
+                MaxHP = playerStats.maxHP,
+                CollectedGems = playerStats.collectedGems
+            };
+
+            // Tell the manager to save it to the cloud
+            await CloudSaveManager.instance.SaveData(progressData);
+        }
+
+        // --- ADD THESE TWO LINES ---
+        // 1. Unfreeze the game before changing scenes
+        Time.timeScale = 1f;
+
+        // 2. Load your main menu or login scene. Replace "LoginScene" with your actual scene name.
+        SceneManager.LoadScene("LoginScene");
     }
+
 }

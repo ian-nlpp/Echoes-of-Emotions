@@ -11,6 +11,7 @@ public class UILogin : MonoBehaviour
     [SerializeField] private TMP_Text userNameText;
     [SerializeField] private Transform loginPanel, userPanel;
     [SerializeField] private LoginController loginController;
+    [SerializeField] private PlayerStats playerStats;
 
     private PlayerProfile playerProfile;
 
@@ -42,11 +43,33 @@ public class UILogin : MonoBehaviour
         userIdText.text = $"id_{playerProfile.playerInfo.Id}";
         userNameText.text = profile.Name;
 
-        SavePlayerData(playerProfile);
+        // --- NEW: Load data from the cloud ---
+        if (CloudSaveManager.instance != null)
+        {
+            var loadedProgress = await CloudSaveManager.instance.LoadData();
 
-        // Delay for 2 seconds before loading the next scene
+            // If data was loaded, apply it to our PlayerStats. Otherwise, use defaults.
+            if (loadedProgress.PlayerName != null)
+            {
+                playerStats.playerName = loadedProgress.PlayerName;
+                playerStats.currentHP = loadedProgress.CurrentHP;
+                playerStats.maxHP = loadedProgress.MaxHP;
+                playerStats.collectedGems = loadedProgress.CollectedGems;
+            }
+            else
+            {
+                // This is a new player, set default stats
+                playerStats.playerName = profile.Name;
+                playerStats.currentHP = 100;
+                playerStats.maxHP = 100;
+                playerStats.collectedGems = 0;
+            }
+        }
+
+        SavePlayerData(playerProfile); // This saves the ID locally, which is fine
+
         await System.Threading.Tasks.Task.Delay(2000);
-        SceneManager.LoadScene("NextSceneName"); // replace with next scene name
+        SceneManager.LoadScene("SunlitDunes");
     }
 
     private void LoginController_OnAvatarUpdate(PlayerProfile profile)
